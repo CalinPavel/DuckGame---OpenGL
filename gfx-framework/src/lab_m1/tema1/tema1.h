@@ -13,19 +13,6 @@
 #include "core/gpu/shader.h"
 #include "core/engine.h"
 
-namespace gfxc
-{
-    /// Holds all state information relevant to a character as loaded using FreeType
-
-    // A renderer class for rendering text displayed by a font loaded using the
-    // FreeType library. A single font is loaded, processed into a list of Character
-    // items for later rendering.
-    class TextRenderer
-    {
-    };
-}
-
-
 #pragma once
 
 #include "components/simple_scene.h"
@@ -40,20 +27,19 @@ namespace m1
 
     struct Character
     {
-        GLuint TextureID;   // ID handle of the glyph texture
-        glm::ivec2 Size;    // Size of glyph
-        glm::ivec2 Bearing; // Offset from baseline to left/top of glyph
-        GLuint Advance;     // Horizontal offset to advance to next glyph
+        GLuint TextureID;
+        glm::ivec2 Size;
+        glm::ivec2 Bearing;
+        GLuint Advance;
     };
 
-    class Lab3 : public gfxc::SimpleScene
+    class tema1 : public gfxc::SimpleScene
     {
     public:
-        Lab3();
-        ~Lab3();
+        tema1();
+        ~tema1();
 
         void Init() override;
-        // void RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color);
 
     private:
         void FrameStart() override;
@@ -70,11 +56,12 @@ namespace m1
         void OnWindowResize(int width, int height) override;
 
         void DrawHUD();
+        void DrawHUD_Lost();
 
     protected:
         float cx, cy, bx, by, hx, hy, kx, ky, wx_1, wy_1, wx_2, wy_2;
         glm::mat3 modelBody, modelHead, modelWing1, modelWing2, modelBeak, modelHealth, modelHealth1, modelHealth2;
-        glm::mat3 modelBullet1, modelBullet2, modelBullet3, modelScore, modelScoreBlock1, modelScoreBlock2, modelScoreBlock3, modelScoreBlock4, modelScoreBlock5;
+        glm::mat3 modelBullet1, modelBullet2, modelBullet3, modelScore, modelScoreBlock1, modelScoreBlock2, modelScoreBlock3, modelScoreBlock4, modelScoreBlock5, modelGrass;
 
         float translateX, translateY;
         float scaleX, scaleY;
@@ -119,35 +106,31 @@ namespace m1
         int bullets;
         int score;
         int level = 0;
+        int spawn_counter = 1;
 
         float t;
-        bool LEVEL_UP =0;
+        bool LEVEL_UP = 0;
+        float level_dif = 1;
 
-        float t_text=0;
+        bool GAME_OVER = 0;
+
+        float t_text = 0;
 
     public:
-        // Holds a list of pre-compiled Characters
         std::map<GLchar, Character> Characters;
 
-        // Shader used for text rendering
         Shader *m_textShader;
 
     public:
-        // Constructor
         void TextRenderer(const std::string &selfDir, GLuint width, GLuint height);
 
-        // Pre-compiles a list of characters from the given font
         void Load(std::string font, GLuint fontSize);
 
-        // Renders a string of text using the precompiled list of characters
         void RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color = glm::vec3(1.0f));
 
     private:
-        // Render state
         GLuint VAO, VBO;
-
-        // TODO(student): If you need any other class variables, define them here.
     };
-} // namespace m1
+}
 
 #endif

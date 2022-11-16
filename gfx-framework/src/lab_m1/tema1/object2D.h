@@ -8,8 +8,6 @@
 
 namespace object2D
 {
-
-    // Create square with given bottom left corner, length and color
     Mesh* CreateBody(const std::string &name, glm::vec3 leftBottomCorner, float length, glm::vec3 color, bool fill = false);
     Mesh* CreateBeak(const std::string &name, glm::vec3 leftBottomCorner, float length, glm::vec3 color, bool fill = false);
     Mesh* CreateHead(const std::string &name, glm::vec3 leftBottomCorner, glm::vec3 color, bool fill = false);
@@ -19,5 +17,5 @@ namespace object2D
     Mesh* CreateBullet(const std::string &name, glm::vec3 leftBottomCorner, float length, glm::vec3 color, bool fill = false);
     Mesh* CreateScore(const std::string &name, glm::vec3 leftBottomCorner, float length, glm::vec3 color, bool fill = false);
     Mesh* CreateScoreBlock(const std::string &name, glm::vec3 leftBottomCorner, float length, glm::vec3 color, bool fill = false);
-    
+    Mesh* CreateGrass(const std::string &name, glm::vec3 leftBottomCorner, float length, glm::vec3 color, bool fill = false);
 }

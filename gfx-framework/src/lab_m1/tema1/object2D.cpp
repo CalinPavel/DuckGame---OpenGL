@@ -249,3 +249,36 @@ Mesh* object2D::CreateScoreBlock(
     body->InitFromData(vertices, indices);
     return body;
 }
+
+
+Mesh* object2D::CreateGrass(
+    const std::string &name,
+    glm::vec3 leftBottomCorner,
+    float length,
+    glm::vec3 color,
+    bool fill)
+{
+    glm::vec3 corner = leftBottomCorner;
+
+    std::vector<VertexFormat> vertices =
+    {
+        VertexFormat(glm::vec3(0, 0 , 0), color),
+        VertexFormat(corner + glm::vec3(1280, 0 , 0), color),
+        VertexFormat(corner + glm::vec3(1280, 200 , 0), color),
+        VertexFormat(corner + glm::vec3(0, 200, 0), color),
+    };
+
+    Mesh* body = new Mesh(name);
+    std::vector<unsigned int> indices = { 0, 1, 2, 3 };
+
+    if (!fill) {
+		body->SetDrawMode(GL_LINE_LOOP);
+	}
+	else {
+		indices.push_back(0);
+		indices.push_back(2);
+	}
+
+    body->InitFromData(vertices, indices);
+    return body;
+}
